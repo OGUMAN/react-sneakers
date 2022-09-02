@@ -1,31 +1,50 @@
+import React from 'react';
+
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
-const arr = [
-  {title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 12999, imageUrl: '/img/sneakers/1.jpg'},
-  {title: 'Мужские Кроссовки Nike Air Max 270', price: 12999, imageUrl: '/img/sneakers/2.jpg'},
-  {title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 8499, imageUrl: '/img/sneakers/3.jpg'},
-  {title: 'Кроссовки Puma X Aka Boku Future Rider', price: 8499, imageUrl: '/img/sneakers/4.jpg'}
-];
-
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('https://63024bccc6dda4f287b73c90.mockapi.io/sneakers')
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      setItems(json);
+    });
+}, []);
+
+  const onAddToCard = (obj) => {
+    setCartItems([...cartItems, obj]);
+    console.log(cartItems)
+  }
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer items={cartItems} onClose={() => {setCartOpened(false)}} />}
+      <Header onClickCart={() => {setCartOpened(true)}} />
 
-      <div className="content p-40">
-        <div className="mb-40 d-flex align-center justify-between">
-          <h1 className="">Все кроссовки</h1>
-          <div className="search-block">
-            <img src="/img/search.svg" alt="Seatch"/>
+      <div className="content container">
+        <div className="mb-40 d-flex align-center justify-between flex-wrap">
+          <h1 className="mr-30 mb-20 title">Все кроссовки</h1>
+          <div className="search-block d-flex align-center">
+            <img src="/img/search.svg" alt="Search"/>
             <input placeholder="Поиск..."/>
           </div>
         </div>
-        <div className="d-flex">
-        {arr.map((obj) => (
-          <Card title={obj.title} price={obj.price} imageUrl={obj.imageUrl} />
+        <div className="d-flex flex-wrap justify-around">
+        {items.map((item) => (
+          <Card 
+            title={item.title} 
+            price={item.price} 
+            imageUrl={item.imageUrl}
+            onFavorite={() => {}}
+            onPlus={(obj) => onAddToCard(obj)} />
         ))}
         </div>
       </div>
