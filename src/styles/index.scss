@@ -208,6 +208,35 @@ header{
 	padding: 40px;
 }
 
+.alert{
+	height: 100%;
+}
+
+.alert__btn{
+	max-width: 260px;
+	position: relative;
+	img{
+		left: 25px;
+		top: 50%;
+		position: absolute;
+		transform: translateY(-50%) rotate(180deg);
+	}
+}
+
+.alert__content{
+	h4{
+		font-size: 22px;
+		font-weight: 600;
+		line-height: 27px;
+	}
+
+	.alert__text{
+		color: rgba($color: #000000, $alpha: 0.4);
+		font-size: 16px;
+		line-height: 24px;
+	}
+}
+
 @keyframes drawer{
 	0%{
 		right: -100%;
