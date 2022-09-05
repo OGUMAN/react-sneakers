@@ -1,10 +1,16 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card({ title, imageUrl, price, onFavorite, onPlus, onCardRemove, cartItems }) {
-  // const [isAdded, setIsAdded] = React.useState(cartItems.some((obj) => obj.title === title));
-  const [isFavorite, setIsFavorite] = React.useState(false);
+function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onPlus, onCardRemove, cartItems, favoritesItems }) {
 
+  const onClickFavorite = () => {
+    if(!favoritesItems.some((obj) => obj.title === title)){
+      onAddToFavorites({title, imageUrl, price});
+    }
+    else{
+      onFavoritesRemove();
+    }
+  }
 
   const onClickCard = () => {
     if(!cartItems.some((obj) => obj.title === title)){
@@ -15,14 +21,10 @@ function Card({ title, imageUrl, price, onFavorite, onPlus, onCardRemove, cartIt
     }
   }
 
-  const onClickFavorite = () => {
-    setIsFavorite(!isFavorite);
-  }
-
     return(
         <div className={styles.card}>
             <div className={styles.favorite} onClick={onClickFavorite}>
-              <img src={`/img/${isFavorite ? 'liked' : 'unliked'}.svg`} alt="Unliked"/>
+              <img src={`/img/${favoritesItems.some((obj) => obj.title === title) ? 'liked' : 'unliked'}.svg`} alt="Unliked"/>
             </div>
             <img width={133} height={112} src={imageUrl} alt="Product"/>
             <h5>{title}</h5>

@@ -12,6 +12,9 @@ function App() {
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
 
+  const [favoritesItems, setFavoriteItems] = React.useState([]);
+  const [favoritesOpened, setFavoritesOpened] = React.useState(false);
+
   React.useEffect(() => {
     axios.get('jsons/sneakers.json').then(res => {
       setItems(res.data);
@@ -34,12 +37,37 @@ function App() {
     setCartItems(cartItems.filter(arg => arg.title !== obj.title));
   }
 
+  const onAddToFavorites = (obj) => {
+    setFavoriteItems(
+      (prev) => [...favoritesItems, obj]
+    )
+  }
+
+  const onFavoritesRemove = (obj) => {
+    setFavoriteItems(
+      favoritesItems.filter(arg => arg.title !== obj.title)
+    )
+  }
+
   return (
     <div className="wrapper clear">
       {cartOpened && <Drawer removeCartItem={removeCartItem} items={cartItems} onClose={() => {setCartOpened(false)}} />}
-      <Header onClickCart={() => {setCartOpened(true)}} />
+      <Header setFavoritesOpened={setFavoritesOpened} onClickCart={() => {setCartOpened(true)}} />
 
-      <Home 
+      {favoritesOpened ? 
+      <Favorites 
+        setFavoritesOpened={setFavoritesOpened}
+        favoritesItems={favoritesItems}
+        searchValue={searchValue}
+        onAddToCard={onAddToCard}
+        onCardRemove={onCardRemove}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        onAddToFavorites={onAddToFavorites}
+        onFavoritesRemove={onFavoritesRemove}
+        onClose={() => {setFavoritesOpened(false)}}
+      /> :
+      (<Home 
         searchValue={searchValue}
         onChangeSearchInput={onChangeSearchInput}
         setSearchValue={setSearchValue}
@@ -48,7 +76,11 @@ function App() {
         items={items}
         onCardRemove={onCardRemove}
         setCartItems={setCartItems}
-      />
+        setFavoriteItems={setFavoriteItems}
+        favoritesItems={favoritesItems}
+        onAddToFavorites={onAddToFavorites}
+        onFavoritesRemove={onFavoritesRemove}
+      />)}
     </div>
   );
 }
