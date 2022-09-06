@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onPlus, onCardRemove, cartItems, favoritesItems }) {
+function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onPlus, onCardRemove, cartItems, favoritesItems, priceAdd, priceReduce }) {
 
   const onClickFavorite = () => {
     if(!favoritesItems.some((obj) => obj.title === title)){
@@ -15,9 +15,11 @@ function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onP
   const onClickCard = () => {
     if(!cartItems.some((obj) => obj.title === title)){
       onPlus({title, imageUrl, price});
+      priceAdd();
     }
     else{
       onCardRemove();
+      priceReduce();
     }
   }
 

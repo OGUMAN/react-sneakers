@@ -1,6 +1,6 @@
 import Card from './Card';
 
-function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove }){
+function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce }){
     return(
         <div className="content container">
         <div className="mb-40 d-flex align-center justify-between flex-wrap">
@@ -24,7 +24,9 @@ function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onA
             cartItems={cartItems}
             setCartItems={setCartItems}
             favoritesItems={favoritesItems}
-            onFavoritesRemove={() => {onFavoritesRemove(item)}} />
+            onFavoritesRemove={() => {onFavoritesRemove(item)}}
+            priceAdd={()=>{priceAdd(item.price)}}
+            priceReduce={()=>{priceReduce(item.price)}} />
         ))}
         </div>
       </div>

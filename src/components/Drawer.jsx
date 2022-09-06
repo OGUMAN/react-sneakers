@@ -1,17 +1,32 @@
+import React from 'react';
 import Alert from './Alert';
 
-function Drawer(props) {
+function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCartItems, setPrice, concatBoughtItems }) {
+  const [isBought, setIsBought] = React.useState(false);
+
+  const onCartItemRemove = (obj) => {
+    removeCartItem(obj); 
+    priceReduce(obj.price);
+  }
+
+  const buyCartItems = () => {
+    concatBoughtItems();
+    setCartItems([]);
+    setIsBought(true);
+    setPrice(0);
+  }
+
     return(
-      props.items.length>0 ? 
+      cartItems.length>0 ? 
         <div className="overlay">
         <div className="drawer d-flex">
           <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
             <div className="items-wrapper">
               <h2 className="mb-30 d-flex justify-between align-center">
-                Корзина  <img onClick={props.onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+                Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
               <div className="items">
-                {props.items.map((obj) => (
+                {cartItems.map((obj) => (
                   <div className="cartItem d-flex align-center mb-20">
                     <div
                     style={{backgroundImage: `url(${obj.imageUrl})`}}
@@ -20,7 +35,7 @@ function Drawer(props) {
                       <p className="mb-5">{obj.title}</p>
                       <b>{obj.price} руб.</b>
                     </div>
-                    <img onClick={()=>{props.removeCartItem(obj)}} className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
+                    <img onClick={()=>{onCartItemRemove(obj)}} className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
                   </div>
                 ))}
                 </div>
@@ -30,26 +45,36 @@ function Drawer(props) {
                   <li>
                     <span>Итого:</span>
                     <div></div>
-                    <b>21 498 руб.</b>
+                    <b>{price} руб.</b>
                   </li>
                   <li className="d-flex">
                     <span>Налог 5%:</span>
                     <div></div>
-                    <b>1074 руб.</b>
+                    <b>{(price * 0.05).toFixed(2)} руб.</b>
                   </li>
                 </ul>
-                <button className="btn">Оформить заказ <img src="img/arrow.svg" alt="Arrow"/></button>
+                <button onClick={buyCartItems} className="btn">Оформить заказ <img src="img/arrow.svg" alt="Arrow"/></button>
             </div>
           </div>
         </div>
-        </div> : 
+        </div> : isBought ? 
+        <div className="overlay">
+        <div className="drawer d-flex">
+          <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
+            <h2 className="mb-30 d-flex justify-between align-center">
+              Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+            </h2>
+            <Alert onClose={onClose} imageUrl={'img/bought.png'} title={'Заказ оформлен!'} text={'Ваш заказ #18 скоро будет передан курьерской доставке'}/>
+          </div>
+        </div>
+      </div> :
         <div className="overlay">
           <div className="drawer d-flex">
             <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
               <h2 className="mb-30 d-flex justify-between align-center">
-                Корзина  <img onClick={props.onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+                Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
-              <Alert onClose={props.onClose} imageUrl={'img/empty.png'} title={'Корзина пустая'} text={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}/>
+              <Alert onClose={()=>{onClose(); setIsBought(false)}} imageUrl={'img/empty.png'} title={'Корзина пустая'} text={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}/>
             </div>
           </div>
         </div>

@@ -1,9 +1,7 @@
 import Card from './Card';
 import Alert from './Alert';
 
-function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose }){
-  console.log(favoritesItems)
-  console.log(cartItems)
+function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose, priceAdd, priceReduce }){
     return(
         <div>
         {favoritesItems.length>0 ? 
@@ -23,12 +21,13 @@ function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard
               price={item.price} 
               imageUrl={item.imageUrl}
               onPlus={(obj) => onAddToCard(obj)}
-              // onAddToFavorites={(obj) => {onAddToFavorites(obj)}}
               onCardRemove={()=>{onCardRemove(item)}} 
               cartItems={cartItems}
               setCartItems={setCartItems}
               favoritesItems={favoritesItems}
-              onFavoritesRemove={() => {onFavoritesRemove(item)}} />
+              onFavoritesRemove={() => {onFavoritesRemove(item)}}
+              priceAdd={()=>{priceAdd(item.price)}}
+              priceReduce={()=>{priceReduce(item.price)}} />
             )
           )
         }</div>
