@@ -1,7 +1,7 @@
-function Header({ onClickCart, setFavoritesOpened, price, setOrdersOpened }) {
+function Header({ onClickCart, setFavoritesOpened, price, setOrdersOpened, logoOnClick }) {
     return(
         <header className="d-flex justify-between align-center container flex-wrap">
-            <div className="d-flex align-center mb-15 cu-p">
+            <div onClick={logoOnClick} className="d-flex align-center mb-15 cu-p">
                 <div>
                     <img className="mr-15" width={40} height={40} src="/img/logo.svg" alt="Logo"/>
                 </div>
@@ -16,10 +16,10 @@ function Header({ onClickCart, setFavoritesOpened, price, setOrdersOpened }) {
                     <span>{price} руб.</span>
                 </li>
                 <div className="d-flex align-center">
-                    <li onClick={() => {setFavoritesOpened(true)}} className="cu-p mr-15">
+                    <li onClick={() => {setFavoritesOpened(true); setOrdersOpened(false)}} className="cu-p mr-15">
                         <img width={18} height={18} src="/img/favorites.svg" alt="Favorites"/>
                     </li>
-                    <li onClick={() => {setOrdersOpened(true)}} className="cu-p">
+                    <li onClick={() => {setOrdersOpened(true); setFavoritesOpened(false)}} className="cu-p">
                         <img width={18} height={18} src="/img/user.svg" alt="Profile"/>
                     </li>
                 </div>

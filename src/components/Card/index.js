@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onPlus, onCardRemove, cartItems, favoritesItems, priceAdd, priceReduce }) {
+function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onPlus, onCardRemove, cartItems, favoritesItems, priceAdd, priceReduce, canAddToCart }) {
 
   const onClickFavorite = () => {
     if(!favoritesItems.some((obj) => obj.title === title)){
@@ -35,7 +35,9 @@ function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onP
                 <span>Цена:</span>
                 <b>{price} руб.</b>
               </div>
-                <img className={styles.plus + " cu-p"} onClick={onClickCard} src={`/img/${cartItems.some((obj) => obj.title === title) ? 'btn-checked' : 'plus'}.svg`} alt="Add"/>
+                {canAddToCart &&
+                  <img className={styles.plus + " cu-p"} onClick={onClickCard} src={`/img/${cartItems.some((obj) => obj.title === title) ? 'btn-checked' : 'plus'}.svg`} alt="Add"/>
+                }
             </div>
         </div>
     );

@@ -1,11 +1,11 @@
 import Card from './Card';
 import Alert from './Alert';
 
-function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose, priceAdd, priceReduce }){
+function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose, priceAdd, priceReduce, canAddToCart }){
     return(
         <div>
         {favoritesItems.length>0 ? 
-        (<div className="content container">
+        (<div className="content container show">
           <div className="d-flex flex-column justify-center">
             <div className="mb-30 mb-20 d-flex align-center">
               <img onClick={()=>{setFavoritesOpened(false)}} className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
@@ -16,18 +16,19 @@ function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard
           ((item, index) => 
             (
               <Card 
-              key={index}
-              title={item.title} 
-              price={item.price} 
-              imageUrl={item.imageUrl}
-              onPlus={(obj) => onAddToCard(obj)}
-              onCardRemove={()=>{onCardRemove(item)}} 
-              cartItems={cartItems}
-              setCartItems={setCartItems}
-              favoritesItems={favoritesItems}
-              onFavoritesRemove={() => {onFavoritesRemove(item)}}
-              priceAdd={()=>{priceAdd(item.price)}}
-              priceReduce={()=>{priceReduce(item.price)}} />
+                key={index}
+                title={item.title} 
+                price={item.price} 
+                imageUrl={item.imageUrl}
+                onPlus={(obj) => onAddToCard(obj)}
+                onCardRemove={()=>{onCardRemove(item)}} 
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                favoritesItems={favoritesItems}
+                onFavoritesRemove={() => {onFavoritesRemove(item)}}
+                priceAdd={()=>{priceAdd(item.price)}}
+                priceReduce={()=>{priceReduce(item.price)}}
+                canAddToCart={canAddToCart} />
             )
           )
         }</div>

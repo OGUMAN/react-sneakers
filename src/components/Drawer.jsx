@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from './Alert';
 
-function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCartItems, setPrice, concatBoughtItems }) {
+function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCartItems, setPrice, concatBoughtItems, setCartOpened }) {
   const [isBought, setIsBought] = React.useState(false);
 
   const onCartItemRemove = (obj) => {
@@ -20,14 +20,14 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
       cartItems.length>0 ? 
         <div className="overlay">
         <div className="drawer d-flex">
-          <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
+          <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
             <div className="items-wrapper">
               <h2 className="mb-30 d-flex justify-between align-center">
                 Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
               <div className="items">
-                {cartItems.map((obj) => (
-                  <div className="cartItem d-flex align-center mb-20">
+                {cartItems.map((obj, index) => (
+                  <div key={index} className="cartItem d-flex align-center mb-20">
                     <div
                     style={{backgroundImage: `url(${obj.imageUrl})`}}
                     className="cartItemImg"></div>
@@ -60,7 +60,7 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
         </div> : isBought ? 
         <div className="overlay">
         <div className="drawer d-flex">
-          <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
+          <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
             <h2 className="mb-30 d-flex justify-between align-center">
               Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
             </h2>
@@ -70,7 +70,7 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
       </div> :
         <div className="overlay">
           <div className="drawer d-flex">
-            <div className="d-flex flex-column justify-between" style={{height: "100%"}}>
+            <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
               <h2 className="mb-30 d-flex justify-between align-center">
                 Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>

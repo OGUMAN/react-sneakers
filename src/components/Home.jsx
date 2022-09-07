@@ -1,9 +1,16 @@
 import Card from './Card';
 
-function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce }){
+function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce, canAddToCart }){
     return(
-        <div className="content container">
+        <div className="content container show">
         <div className="mb-40 d-flex align-center justify-between flex-wrap">
+          <div className="ad">
+            <div className='ad__content'>
+              <h2>Stan Smith, <br/>Forever!</h2>
+              <a href="#">Купить</a>
+            </div>
+          </div>
+
           <h1 className="mr-30 mb-20 title">{searchValue ? `Поиск по запросу: "${searchValue}"` : `Все кроссовки`}</h1>
           <div className="search-block d-flex align-center">
             <img src="/img/search.svg" alt="Search"/>
@@ -26,7 +33,8 @@ function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onA
             favoritesItems={favoritesItems}
             onFavoritesRemove={() => {onFavoritesRemove(item)}}
             priceAdd={()=>{priceAdd(item.price)}}
-            priceReduce={()=>{priceReduce(item.price)}} />
+            priceReduce={()=>{priceReduce(item.price)}}
+            canAddToCart={canAddToCart} />
         ))}
         </div>
       </div>

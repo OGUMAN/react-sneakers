@@ -65,8 +65,10 @@ function App() {
 
   const concatBoughtItems = () => {
     setBoughtItems(cartItems);
-    setOrdersItems(boughtItems.concat(ordersItems));
-    console.log(ordersItems)
+
+    setOrdersItems(
+      boughtItems.concat(ordersItems)
+    );
   }
 
   const priceAdd = (itemPrice) => {
@@ -75,6 +77,11 @@ function App() {
 
   const priceReduce = (itemPrice) => {
     setPrice(price - itemPrice)
+  }
+
+  const logoOnClick = () => {
+    setOrdersOpened(false);
+    setFavoritesOpened(false);
   }
 
   return (
@@ -89,13 +96,15 @@ function App() {
         setBoughtItems={setBoughtItems}
         setCartItems={setCartItems}
         setPrice={setPrice}
-        concatBoughtItems={concatBoughtItems} />
+        concatBoughtItems={concatBoughtItems}
+        setCartOpened={setCartOpened} />
       }
       <Header 
         price={price} 
         setFavoritesOpened={setFavoritesOpened} 
+        setOrdersOpened={setOrdersOpened}
         onClickCart={() => {setCartOpened(true)}}
-        setOrdersOpened={setOrdersOpened} />
+        logoOnClick={logoOnClick} />
 
       {favoritesOpened ? 
       <Favorites 
@@ -111,6 +120,7 @@ function App() {
         priceAdd={priceAdd}
         priceReduce={priceReduce}
         onCardRemove={onCardRemove}
+        canAddToCart={true}
       /> : ordersOpened ? 
       <Orders 
         setOrdersOpened={setOrdersOpened}
@@ -128,6 +138,7 @@ function App() {
         ordersItem={ordersItems}
         boughtItems={boughtItems}
         onCardRemove={onCardRemove}
+        canAddToCart={false}
       /> :
       (<Home 
         searchValue={searchValue}
@@ -144,6 +155,7 @@ function App() {
         onFavoritesRemove={onFavoritesRemove}
         priceAdd={priceAdd}
         priceReduce={priceReduce}
+        canAddToCart={true}
       />)}
     </div>
   );

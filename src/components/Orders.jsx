@@ -1,10 +1,10 @@
 import Card from './Card';
 import Alert from './Alert';
 
-function Orders ({setOrdersOpened, ordersItems, onAddToCard, cartItems, setCartItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce, favoritesItems, boughtItems, onCardRemove }){
+function Orders ({setOrdersOpened, ordersItems, onAddToCard, cartItems, setCartItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce, favoritesItems, boughtItems, onCardRemove, canAddToCart }){
     return(
-            boughtItems.concat(ordersItems).length? 
-        <div className="content container">
+        boughtItems.concat(ordersItems).length? 
+        <div className="content container show">
             <div className="mb-30 mb-20 d-flex align-center">
                 <img onClick={()=>{setOrdersOpened(false)}} className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
                 <h1 className="mr-30 title">Мои покупки</h1>
@@ -25,7 +25,8 @@ function Orders ({setOrdersOpened, ordersItems, onAddToCard, cartItems, setCartI
             onFavoritesRemove={() => {onFavoritesRemove(item)}}
             priceAdd={()=>{priceAdd(item.price)}}
             priceReduce={()=>{priceReduce(item.price)}}
-            onCardRemove={()=>{onCardRemove(item)}} />
+            onCardRemove={()=>{onCardRemove(item)}}
+            canAddToCart={canAddToCart} />
         ))}
         </div>
       </div>

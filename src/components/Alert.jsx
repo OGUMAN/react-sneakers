@@ -1,6 +1,6 @@
 function Alert ({imageUrl, title, text, onClose}) {
     return( 
-        <div className="alert d-flex flex-column justify-center align-center text-center">
+        <div className="alert d-flex flex-column justify-center align-center text-center show">
             <div className="alert__content">
                 <div className="mb-5">
                     <img src = {imageUrl}/>
