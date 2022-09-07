@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import Header from './components/Header';
@@ -14,11 +15,9 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
   const [favoritesItems, setFavoriteItems] = React.useState([]);
-  const [favoritesOpened, setFavoritesOpened] = React.useState(false);
 
   const [boughtItems, setBoughtItems] = React.useState([]);
   const [ordersItems, setOrdersItems] = React.useState([]);
-  const [ordersOpened, setOrdersOpened] = React.useState(false);
 
   const [price, setPrice] = React.useState(0);
 
@@ -79,11 +78,6 @@ function App() {
     setPrice(price - itemPrice)
   }
 
-  const logoOnClick = () => {
-    setOrdersOpened(false);
-    setFavoritesOpened(false);
-  }
-
   return (
     <div className="wrapper clear">
       {cartOpened && 
@@ -101,62 +95,62 @@ function App() {
       }
       <Header 
         price={price} 
-        setFavoritesOpened={setFavoritesOpened} 
-        setOrdersOpened={setOrdersOpened}
         onClickCart={() => {setCartOpened(true)}}
-        logoOnClick={logoOnClick} />
+       />
 
-      {favoritesOpened ? 
-      <Favorites 
-        setFavoritesOpened={setFavoritesOpened}
-        favoritesItems={favoritesItems}
-        searchValue={searchValue}
-        onAddToCard={onAddToCard}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        onAddToFavorites={onAddToFavorites}
-        onFavoritesRemove={onFavoritesRemove}
-        onClose={() => {setFavoritesOpened(false)}}
-        priceAdd={priceAdd}
-        priceReduce={priceReduce}
-        onCardRemove={onCardRemove}
-        canAddToCart={true}
-      /> : ordersOpened ? 
-      <Orders 
-        setOrdersOpened={setOrdersOpened}
-        ordersItems={ordersItems}
-        onAddToCard={onAddToCard}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        onAddToFavorites={onAddToFavorites}
-        onFavoritesRemove={onFavoritesRemove}
-        onClose={() => {setOrdersOpened(false)}}
-        priceAdd={priceAdd}
-        priceReduce={priceReduce}
-        favoritesItems={favoritesItems}
-        ordersOpened={ordersOpened}
-        ordersItem={ordersItems}
-        boughtItems={boughtItems}
-        onCardRemove={onCardRemove}
-        canAddToCart={false}
-      /> :
-      (<Home 
-        searchValue={searchValue}
-        onChangeSearchInput={onChangeSearchInput}
-        setSearchValue={setSearchValue}
-        cartItems={cartItems}
-        onAddToCard={onAddToCard}
-        items={items}
-        onCardRemove={onCardRemove}
-        setCartItems={setCartItems}
-        setFavoriteItems={setFavoriteItems}
-        favoritesItems={favoritesItems}
-        onAddToFavorites={onAddToFavorites}
-        onFavoritesRemove={onFavoritesRemove}
-        priceAdd={priceAdd}
-        priceReduce={priceReduce}
-        canAddToCart={true}
-      />)}
+      <Routes>
+        <Route path="/favorites" element={
+          <Favorites 
+            favoritesItems={favoritesItems}
+            searchValue={searchValue}
+            onAddToCard={onAddToCard}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            onAddToFavorites={onAddToFavorites}
+            onFavoritesRemove={onFavoritesRemove}
+            priceAdd={priceAdd}
+            priceReduce={priceReduce}
+            onCardRemove={onCardRemove}
+            canAddToCart={true}
+          />
+        }/>
+        <Route path="/orders" element={
+          <Orders 
+          ordersItems={ordersItems}
+          onAddToCard={onAddToCard}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          onAddToFavorites={onAddToFavorites}
+          onFavoritesRemove={onFavoritesRemove}
+          priceAdd={priceAdd}
+          priceReduce={priceReduce}
+          favoritesItems={favoritesItems}
+          ordersItem={ordersItems}
+          boughtItems={boughtItems}
+          onCardRemove={onCardRemove}
+          canAddToCart={false}
+        />
+        }/>
+      <Route path="/" element={
+        <Home 
+          searchValue={searchValue}
+          onChangeSearchInput={onChangeSearchInput}
+          setSearchValue={setSearchValue}
+          cartItems={cartItems}
+          onAddToCard={onAddToCard}
+          items={items}
+          onCardRemove={onCardRemove}
+          setCartItems={setCartItems}
+          setFavoriteItems={setFavoriteItems}
+          favoritesItems={favoritesItems}
+          onAddToFavorites={onAddToFavorites}
+          onFavoritesRemove={onFavoritesRemove}
+          priceAdd={priceAdd}
+          priceReduce={priceReduce}
+          canAddToCart={true}
+        />
+      }/>
+      </Routes>
     </div>
   );
 }

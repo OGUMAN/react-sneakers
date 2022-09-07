@@ -1,14 +1,17 @@
 import Card from './Card';
 import Alert from './Alert';
+import { Link } from 'react-router-dom';
 
-function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose, priceAdd, priceReduce, canAddToCart }){
+function Favorites({ favoritesItems, onAddToCard, onCardRemove, cartItems, setCartItems, onFavoritesRemove, onClose, priceAdd, priceReduce, canAddToCart }){
     return(
         <div>
         {favoritesItems.length>0 ? 
         (<div className="content container show">
           <div className="d-flex flex-column justify-center">
             <div className="mb-30 mb-20 d-flex align-center">
-              <img onClick={()=>{setFavoritesOpened(false)}} className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
+              <Link to="/">
+                <img className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
+              </Link>
               <h1 className="mr-30 title">Мои закладки</h1>
             </div>
           <div className="d-flex flex-wrap justify-around">
@@ -39,7 +42,8 @@ function Favorites({setFavoritesOpened, favoritesItems, searchValue, onAddToCard
           onClose={onClose} 
           imageUrl={'img/crying.png'} 
           title={'Закладок нет :('} 
-          text={'Вы ничего не добавляли в закладки'}/>
+          text={'Вы ничего не добавляли в закладки'}
+          isLink={true} />
         </div></div>)}
         </div>
     )

@@ -74,7 +74,7 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
               <h2 className="mb-30 d-flex justify-between align-center">
                 Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
-              <Alert onClose={()=>{onClose(); setIsBought(false)}} imageUrl={'img/empty.png'} title={'Корзина пустая'} text={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}/>
+              <Alert isLink={false} onClose={()=>{onClose(); setIsBought(false)}} imageUrl={'img/empty.png'} title={'Корзина пустая'} text={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}/>
             </div>
           </div>
         </div>
