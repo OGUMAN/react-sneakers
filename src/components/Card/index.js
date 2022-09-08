@@ -32,8 +32,8 @@ function Card({ title, imageUrl, price, onAddToFavorites, onFavoritesRemove, onP
             <h5>{title}</h5>
             <div className="d-flex justify-between align-center">
               <div className="d-flex flex-column">
-                <span>Цена:</span>
-                <b>{price} руб.</b>
+                <span>Price:</span>
+                <b>{price.toLocaleString("fr")} USD</b>
               </div>
                 {canAddToCart &&
                   <img className={styles.plus + " cu-p"} onClick={onClickCard} src={`/img/${cartItems.some((obj) => obj.title === title) ? 'btn-checked' : 'plus'}.svg`} alt="Add"/>

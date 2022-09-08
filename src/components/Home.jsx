@@ -1,5 +1,7 @@
 import React from 'react';
 import Card from './Card';
+import Skeleton from './Card/Skeleton';
+import { Link } from 'react-router-dom';
 
 function AdItem ({ imageUrl, index, sliderStep }){
   if(sliderStep===index){
@@ -7,7 +9,9 @@ function AdItem ({ imageUrl, index, sliderStep }){
       <div className="ad__item show" style={{backgroundImage: imageUrl}}>
           <div className='ad__content'>
               <h2>Stan Smith, <br/>Forever!</h2>
-              <a href="ad">Купить</a>
+              <Link to="ad">
+                <div className="ad__link">Buy</div>
+              </Link>
           </div>
       </div>
     )
@@ -17,11 +21,12 @@ function AdItem ({ imageUrl, index, sliderStep }){
   }
 }
 
-function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce, canAddToCart }){
+function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onAddToCard, items, onCardRemove, setCartItems, setFavoriteItems, favoritesItems, onAddToFavorites, onFavoritesRemove, priceAdd, priceReduce, canAddToCart, didLoad }){
     const [adItems, setAdItems] = React.useState(
         [
           {imageUrl: "url('/img/ad.jpg')"}, 
-          {imageUrl: "url('/img/ad.jpg')"}
+          {imageUrl: "url('/img/ad-3.jpg')"},
+          {imageUrl: "url('/img/ad-2.jpg')"}
         ]
       )
     const [sliderStep, setSliderStep] = React.useState(0);
@@ -55,16 +60,17 @@ function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onA
             </button>
           </div>
           <div className="d-flex align-center justify-between flex-wrap">
-            <h1 className="mr-30 mb-20 title">{searchValue ? `Поиск по запросу: "${searchValue}"` : `Все кроссовки`}</h1>
+            <h1 className="mr-30 mb-15 title">{searchValue ? `Search by request: "${searchValue}"` : `All sneakers`}</h1>
             <div className="search-block d-flex align-center">
               <img src="/img/search.svg" alt="Search"/>
-              <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..."/>
+              <input onChange={onChangeSearchInput} value={searchValue} placeholder="Search..."/>
               <img onClick={()=>{setSearchValue('')}} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
             </div>
             </div>
         </div>
         <div className="d-flex flex-wrap justify-around">
-        {items.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item, index) => (
+        {didLoad ? 
+        (items.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item, index) => (
           <Card 
             key={index}
             title={item.title} 
@@ -80,7 +86,16 @@ function Home({ searchValue, onChangeSearchInput, setSearchValue, cartItems, onA
             priceAdd={()=>{priceAdd(item.price)}}
             priceReduce={()=>{priceReduce(item.price)}}
             canAddToCart={canAddToCart} />
-        ))}
+        ))) : <>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+                <Skeleton/>
+              </>}
         </div>
       </div>
     );

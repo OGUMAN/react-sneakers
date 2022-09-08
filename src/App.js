@@ -6,6 +6,7 @@ import Drawer from './components/Drawer';
 import Home from './components/Home';
 import Favorites from './components/Favorites';
 import Orders from './components/Orders';
+import Alert from './components/Alert';
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -19,20 +20,16 @@ function App() {
   const [boughtItems, setBoughtItems] = React.useState([]);
   const [ordersItems, setOrdersItems] = React.useState([]);
 
+  const [didLoad, setDidLoad] = React.useState(false);
+
   const [price, setPrice] = React.useState(0);
 
   React.useEffect(() => {
     axios.get('jsons/sneakers.json').then(res => {
       setItems(res.data);
+      setDidLoad(true);
     })
 }, []);
-
-  // React.useEffect(() => {
-  //   setPrice(0);
-  //   cartItems.map((obj) => {
-  //     return setPrice(price + 1);
-  //   })
-  // }, [cartItems]);
 
   const onAddToCard = (obj) => {
     setCartItems((prev) => [...cartItems, obj]);
@@ -116,19 +113,19 @@ function App() {
         }/>
         <Route path="/orders" element={
           <Orders 
-          ordersItems={ordersItems}
-          onAddToCard={onAddToCard}
-          cartItems={cartItems}
-          setCartItems={setCartItems}
-          onAddToFavorites={onAddToFavorites}
-          onFavoritesRemove={onFavoritesRemove}
-          priceAdd={priceAdd}
-          priceReduce={priceReduce}
-          favoritesItems={favoritesItems}
-          ordersItem={ordersItems}
-          boughtItems={boughtItems}
-          onCardRemove={onCardRemove}
-          canAddToCart={false}
+            ordersItems={ordersItems}
+            onAddToCard={onAddToCard}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            onAddToFavorites={onAddToFavorites}
+            onFavoritesRemove={onFavoritesRemove}
+            priceAdd={priceAdd}
+            priceReduce={priceReduce}
+            favoritesItems={favoritesItems}
+            ordersItem={ordersItems}
+            boughtItems={boughtItems}
+            onCardRemove={onCardRemove}
+            canAddToCart={false}
         />
         }/>
       <Route path="/" element={
@@ -148,7 +145,18 @@ function App() {
           priceAdd={priceAdd}
           priceReduce={priceReduce}
           canAddToCart={true}
+          didLoad={didLoad}
         />
+      }/>
+      <Route path="*" element={
+         <div className="content container show d-flex flex-column justify-center">
+            <Alert
+              isLink={true}
+              imageUrl={'img/page-not-found.svg'} 
+              title={'Page not found!'} 
+              text={''}
+            />
+        </div>
       }/>
       </Routes>
     </div>

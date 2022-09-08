@@ -202,7 +202,7 @@ header{
 }
 
 .title{
-	font-size: 25px;
+	font-size: 27.5px;
 }
 
 .container{
@@ -225,6 +225,8 @@ header{
 }
 
 .alert__content{
+	width: 100%;
+
 	h4{
 		font-size: 22px;
 		font-weight: 600;
@@ -244,7 +246,7 @@ header{
 	background-position: center;
 	background-size: cover;
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 35px;
 	padding: 70px 61px;
 	position: relative;	
 	border-radius: 20px;
@@ -256,7 +258,7 @@ header{
 		position: absolute;
 		top: 0;
 		left: 0;
-		display: none;
+		display: block;
 		content: '';
 		border-radius: 20px;
 	}
@@ -269,10 +271,11 @@ header{
 		font-size: 38px;
 		line-height: 46px;
 		font-weight: 700;
-		margin-bottom: 35px;
+		margin-bottom: 20px;
+		color: #ffffff;
 	}
 
-	a{
+	.ad__link{
 		text-transform: uppercase;
 		font-size: 16px;
 		font-weight: 700;
@@ -283,6 +286,7 @@ header{
 		padding: 12px 45px;
 		color: #ffffff!important;
 		transition: background .2s ease-in-out;
+		display: inline-block;
 
 		&:hover{
 			background: lighten(#9dd558, 5%);
@@ -360,9 +364,9 @@ header{
 	.ad__item{
 		padding: 40px 30px;
 		
-		&:before{
-			display: block;
-		}
+		// &:before{
+		// 	display: block;
+		// }
 
 		h2{
 			color: #ffffff;

@@ -8,11 +8,11 @@ function Favorites({ favoritesItems, onAddToCard, onCardRemove, cartItems, setCa
         {favoritesItems.length>0 ? 
         (<div className="content container show">
           <div className="d-flex flex-column justify-center">
-            <div className="mb-30 mb-20 d-flex align-center">
+            <div className="mb-30 mb-15 d-flex">
               <Link to="/">
                 <img className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
               </Link>
-              <h1 className="mr-30 title">Мои закладки</h1>
+              <h1 className="mr-30 title">My bookmarks</h1>
             </div>
           <div className="d-flex flex-wrap justify-around">
         {favoritesItems.map
@@ -41,8 +41,8 @@ function Favorites({ favoritesItems, onAddToCard, onCardRemove, cartItems, setCa
         <Alert 
           onClose={onClose} 
           imageUrl={'img/crying.png'} 
-          title={'Закладок нет :('} 
-          text={'Вы ничего не добавляли в закладки'}
+          title={'No bookmarks :('} 
+          text={'You haven\'t bookmarked anything'}
           isLink={true} />
         </div></div>)}
         </div>

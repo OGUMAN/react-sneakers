@@ -6,11 +6,11 @@ function Orders ({setOrdersOpened, ordersItems, onAddToCard, cartItems, setCartI
     return(
         boughtItems.concat(ordersItems).length? 
         <div className="content container show">
-            <div className="mb-30 mb-20 d-flex align-center">
+            <div className="mb-30 mb-15 d-flex">
                 <Link to="/">
                     <img className="removeBtn cu-p mr-20" src="/img/btn-back.svg" alt="Close"/>
                 </Link>
-                <h1 className="mr-30 title">Мои покупки</h1>
+                <h1 className="mr-30 title">My purchases</h1>
                 </div>
             <div className="d-flex flex-wrap justify-around">
         {boughtItems.concat(ordersItems).map((item, index) => (
@@ -37,8 +37,8 @@ function Orders ({setOrdersOpened, ordersItems, onAddToCard, cartItems, setCartI
       <div className="content container d-flex flex-column justify-center align-center">
           <div className="mb-40 d-flex align-center justify-between flex-wrap">
             <Alert 
-                title='У вас нет заказов'
-                text='Вы нищеброд? Оформите хотя бы один заказ.'
+                title='You have no orders'
+                text='Are you a rogue? Place at least one order.'
                 imageUrl='img/sad.png'
                 isLink={true}
             />

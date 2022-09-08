@@ -1,43 +1,43 @@
 [
     {
-     "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-     "price": 12999,
+     "title": "Nike Blazer Mid Suede Men's Sneakers",
+     "price": 199,
      "imageUrl": "/img/sneakers/1.jpg"
     },
     {
-     "title": "Мужские Кроссовки Nike Air Max 270",
-     "price": 12999,
+     "title": "199 Air Max 270 Men's Running Shoes",
+     "price": 199,
      "imageUrl": "/img/sneakers/2.jpg"
     },
     {
-     "title": "Мужские Кроссовки Nike Blazer Mid Suede White",
-     "price": 8499,
+     "title": "Nike Blazer Mid Suede White",
+     "price": 139,
      "imageUrl": "/img/sneakers/3.jpg"
     },
     {
-     "title": "Кроссовки Puma X Aka Boku Future Rider",
-     "price": 8499,
+     "title": "Puma X Aka Boku Future Rider sneakers",
+     "price": 139,
      "imageUrl": "/img/sneakers/4.jpg"
     },
 
     {
-     "title": "Мужские Кроссовки Under Armour Curry 8",
-     "price": 15190,
+     "title": "Under Armor Curry 8 Men's Sneakers",
+     "price": 249,
      "imageUrl": "/img/sneakers/5.jpg"
     },
     {
-     "title": "Мужские Кроссовки Nike Kyrie 7",
-     "price": 11299,
+     "title": "Nike Kyrie 7 Men's Sneakers",
+     "price": 199,
      "imageUrl": "/img/sneakers/6.jpg"
     },
     {
-     "title": "Мужские Кроссовки Jordan Air Jordan 11",
-     "price": 10799,
+     "title": "Jordan Air Jordan 11 Men's Sneakers",
+     "price": 179,
      "imageUrl": "/img/sneakers/7.jpg"
     },
     {
-     "title": "Мужские Кроссовки Nike LeBron XVIII",
-     "price": 16499,
+     "title": "Nike LeBron XVIII Men's Sneakers",
+     "price": 279,
      "imageUrl": "/img/sneakers/8.jpg"
     }
    ]

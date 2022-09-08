@@ -23,7 +23,7 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
           <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
             <div className="items-wrapper">
               <h2 className="mb-30 d-flex justify-between align-center">
-                Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+                Basket  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
               <div className="items">
                 {cartItems.map((obj, index) => (
@@ -33,7 +33,7 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
                     className="cartItemImg"></div>
                     <div className="mr-20 flex">
                       <p className="mb-5">{obj.title}</p>
-                      <b>{obj.price} руб.</b>
+                      <b>{obj.price.toLocaleString("fr")} USD</b>
                     </div>
                     <img onClick={()=>{onCartItemRemove(obj)}} className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
                   </div>
@@ -43,17 +43,17 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
               <div className="cartTotalBlock pt-50">
                 <ul>
                   <li>
-                    <span>Итого:</span>
+                    <span>Total:</span>
                     <div></div>
-                    <b>{price} руб.</b>
+                    <b>{price.toLocaleString("fr")} USD</b>
                   </li>
                   <li className="d-flex">
-                    <span>Налог 5%:</span>
+                    <span>Tax 5%:</span>
                     <div></div>
-                    <b>{(price * 0.05).toFixed(2)} руб.</b>
+                    <b>{(price * 0.05).toFixed(2).toLocaleString("fr")} USD</b>
                   </li>
                 </ul>
-                <button onClick={buyCartItems} className="btn">Оформить заказ <img src="img/arrow.svg" alt="Arrow"/></button>
+                <button onClick={buyCartItems} className="btn">Checkout <img src="img/arrow.svg" alt="Arrow"/></button>
             </div>
           </div>
         </div>
@@ -62,9 +62,9 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
         <div className="drawer d-flex">
           <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
             <h2 className="mb-30 d-flex justify-between align-center">
-              Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+            Basket  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
             </h2>
-            <Alert onClose={onClose} imageUrl={'img/bought.png'} title={'Заказ оформлен!'} text={'Ваш заказ #18 скоро будет передан курьерской доставке'}/>
+            <Alert onClose={onClose} imageUrl={'img/bought.png'} title={'Order is processed!'} text={'Your order #18 will be delivered to courier soon'}/>
           </div>
         </div>
       </div> :
@@ -72,9 +72,9 @@ function Drawer({ cartItems, onClose, removeCartItem, priceReduce, price, setCar
           <div className="drawer d-flex">
             <div className="d-flex flex-column justify-between show" style={{height: "100%"}}>
               <h2 className="mb-30 d-flex justify-between align-center">
-                Корзина  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+              Basket  <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
               </h2>
-              <Alert isLink={false} onClose={()=>{onClose(); setIsBought(false)}} imageUrl={'img/empty.png'} title={'Корзина пустая'} text={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}/>
+              <Alert isLink={false} onClose={()=>{onClose(); setIsBought(false)}} imageUrl={'img/empty.png'} title={'Cart is empty'} text={'Add at least one pair of sneakers to place an order.'}/>
             </div>
           </div>
         </div>
